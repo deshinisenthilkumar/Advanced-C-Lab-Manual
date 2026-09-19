@@ -1,283 +1,461 @@
 
 
-EXP NO:21 C PROGRAM TO CREATE A FUNCTION TO FIND THE GREATEST NUMBER
+EXP NO 26: C PROGRAM TO DISPLAY STACK ELEMENTS USING LINKED LIST.
 
 Aim:
-To write a C program to create a function to find the greatest number
+To write a C program to display stack elements using linked list.
 
 Algorithm:
-1.	Include the necessary header #include <stdio.h>.
-2.	Use a series of if and else if statements to compare the values and return the maximum among them.
-3.	Declare variables n1, n2, n3, n4, and greater to store user input and the result.
-4.	Use scanf to take four integers as input.
-5.	Call the max_of_four function with the input integers and store the result in the greater variable
+1.	Define a structure Node with two members: data to store the integer value and next to point to the next node in the linked list.
+2.	Declare a global variable head representing the starting node of the linked list.
+3.	Define a function display to print the elements of the linked list.
+4.	Declare a pointer p and initialize it with the head of the linked list.
+5.	Use a while loop to traverse the linked list:
+6.	Print the data of the current node.
+7.	Move to the next node using the next pointer.
  
 Program:
-```
-#include <stdio.h>
 
-int max_of_four(int a, int b, int c, int d) {
-    if (a >= b && a >= c && a >= d)
-        return a;
-    else if (b >= a && b >= c && b >= d)
-        return b;
-    else if (c >= a && c >= b && c >= d)
-        return c;
-    else
-        return d;
-}
-
-int main() {
-    int n1, n2, n3, n4, greater;
-
-    printf("Enter four integers: ");
-    scanf("%d %d %d %d", &n1, &n2, &n3, &n4);
-
-    greater = max_of_four(n1, n2, n3, n4);
-
-    printf("The greatest number is: %d\n", greater);
-
-    return 0;
-}
-```
-
-Output:
-
-<img width="642" height="185" alt="image" src="https://github.com/user-attachments/assets/0ffe601f-0c38-4b71-9040-d5c3cf391690" />
-
-Result:
-
-Thus, the program  that create a function to find the greatest number is verified successfully.
-
-
- 
-EXP NO:22 C PROGRAM TO PRINT THE MAXIMUM VALUES FOR THE AND, OR AND  XOR COMPARISONS
-
-Aim:
-To write a C program to print the maximum values for the AND, OR and XOR comparisons
-
-Algorithm:
-1.	Define a function calculate_the_max that takes two integers n and k as parameters.
-2.	Declare variables a, o, and x to store the maximum values for AND, OR, and XOR operations, respectively.
-3.	Use nested loops to iterate through pairs of integers (i, j) from 1 to n.
-4.	Within the loops, check conditions for AND, OR, and XOR operations and update the corresponding maximum values (a, o, x).
-5.	Declare variables n and k to store user input.
-6.	Use scanf to take two integers as input.
-7.	Call the calculate_the_max function with input values.
- 
-Program:
-```
-#include <stdio.h>
-
-void calculate_the_maximum(int n, int k) {
-    int maxA = 0, maxO = 0, maxX = 0;
-    
-    for (int a = 1; a < n; a++) {
-        for (int b = a + 1; b <= n; b++) {
-            int andV = a & b;
-            int orV = a | b;
-            int xorV = a ^ b;
-            
-            if (andV < k && andV > maxA) {
-                maxA = andV;
-            }
-            if (orV < k && orV > maxO) {
-                maxO = orV;
-            }
-            if (xorV < k && xorV > maxX) {
-                maxX = xorV;
-            }
-        }
-    }
-    
-    printf("%d\n%d\n%d\n", maxA, maxO, maxX);
-}
-
-int main() {
-    int n, k;
-    scanf("%d %d", &n, &k);
-    calculate_the_maximum(n, k);
-    return 0;
-}
-
-```
-
-Output:
-
-<img width="572" height="687" alt="image" src="https://github.com/user-attachments/assets/050f704a-376c-4962-a636-c170440163da" />
-
-Result:
-
-Thus, the program to print the maximum values for the AND, OR and XOR comparisons
-is verified successfully.
-
-
- 
-EXP NO:23 C PROGRAM TO WRITE THE LOGIC FOR THE REQUESTS
-
-Aim:
-To write a C program to write the logic for the requests
-
-Algorithm:
-1.	Declare variables noshel and noque to store the number of shelves and the number of queries, respectively.
-2.	Use scanf to take two integers as input for the number of shelves and queries.
-3.	Declare a 2D array shelarr to represent shelves and books, and an array nobookarr to store the number of books on each shelf.
-4.	Declare variables k and c to keep track of the book index and the total number of books.
-5.	Use a for loop to iterate over the queries.
- 
-Program:
 ```
 #include <stdio.h>
 #include <stdlib.h>
-int* shelves[1000]; 
-int bookcount[1000] = {0}; 
 
-int main() 
-{
-    int n, q;
-    scanf("%d %d", &n, &q);
+struct Node {
+    int data;
+    struct Node* next;
+};
 
-    while (q--)
-    {
-        int type, x, y;
-        scanf("%d", &type);
+struct Node* head = NULL;
 
-        if (type == 1)
-        {
-            scanf("%d %d", &x, &y);
-            shelves[x] = realloc(shelves[x], (bookcount[x] + 1) * sizeof(int));
-            shelves[x][bookcount[x]++] = y;
-        } 
-        else if (type == 2) 
-        {
-            scanf("%d %d", &x, &y);
-            printf("%d\n", shelves[x][y]);
-        } 
-        else if (type == 3) 
-        { 
-            scanf("%d", &x);
-            printf("%d\n", bookcount[x]);
-        }
+void display() {
+    struct Node* p = head;
+    if (p == NULL) {
+        printf("Linked list is empty.\n");
+        return;
     }
+    printf("Linked list elements are:\n");
+    while (p != NULL) {
+        printf("%d ", p->data);
+        p = p->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    struct Node* first = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* second = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* third = (struct Node*)malloc(sizeof(struct Node));
+
+    first->data = 10;
+    second->data = 20;
+    third->data = 30;
+
+    first->next = second;
+    second->next = third;
+    third->next = NULL;
+
+    head = first;
+
+    display();
 
     return 0;
 }
-
 ```
 
 Output:
 
-<img width="785" height="702" alt="image" src="https://github.com/user-attachments/assets/1e32e9ab-f5a6-4086-8d8b-7032c8a04be0" />
+<img width="465" height="172" alt="image" src="https://github.com/user-attachments/assets/9b2ea1a8-e0c8-44bb-acde-6608ce4b44e6" />
 
 
 Result:
 
-Thus, the program to write the logic for the requests is verified successfully.
+Thus, the program to display stack elements using linked list is verified successfully. 
 
 
- 
-EXP NO:24 C PROGRAM PRINT THE SUM OF THE INTEGERS IN THE ARRAY.
+
+EXP.NO 27: C PROGRAM TO POP AN ELEMENT FROM THE GIVEN STACK USING 
+LINKED LIST.
 
 Aim:
-To write a C program print the sum of the integers in the array.
+To write a C program to pop an element from the given stack using liked list.
 
 Algorithm:
-1.	Declare a variable n to store the number of integers.
-2.	Use scanf to take an integer n as input.
-3.	Declare an array a of size n to store the integers.
-4.	Declare a variable sum and initialize it to zero.
-5.	Use a for loop to iterate n times:
-6.	Use scanf to input each integer and add it to the sum.
-7.	Print the final sum using printf.
-
-
-
+1.	Check for Empty Stack
+2.	If head is equal to NULL, Print "Stack is empty."
+3.	Else Proceed to the next step.
+4.	Set head to point to the next node in the stack.
+ 
 Program:
+
 ```
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
-    int n, sum = 0;
-    scanf("%d", &n);
-    
-    int *arr = (int*)malloc(n * sizeof(int));
-    if (arr == NULL) {
-        return 1;
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* head = NULL;
+
+void push(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        printf("Memory allocation failed.\n");
+        return;
     }
-    
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &arr[i]);
-        sum += arr[i];
-    }
-    
-    printf("%d\n", sum);
-    
-    free(arr);
-    return 0;
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
 }
+
+void pop() {
+    if (head == NULL) {
+        printf("Stack is empty.\n");
+    } else {
+        struct Node* temp = head;
+        printf("Popped element: %d\n", head->data);
+        head = head->next;
+        free(temp);
+    }
+}
+
+void display() {
+    struct Node* p = head;
+    if (p == NULL) {
+        printf("Stack is empty.\n");
+    } else {
+        printf("Stack elements are:\n");
+        while (p != NULL) {
+            printf("%d ", p->data);
+            p = p->next;
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int choice, value;
+
+    while (1) {
+        printf("\n1. Push\n2. Pop\n3. Display\n4. Exit\nEnter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to push: ");
+                scanf("%d", &value);
+                push(value);
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+}
+
 ```
+
 Output:
 
-<img width="765" height="427" alt="image" src="https://github.com/user-attachments/assets/1c144d45-6d8c-44cb-ba0d-4f0b5a7b4bda" />
+<img width="367" height="747" alt="image" src="https://github.com/user-attachments/assets/cfc620d7-eeb4-4f6e-a1fb-80ba73a88a7d" />
 
- 
+
 
 
 Result:
 
-Thus, the program prints the sum of the integers in the array is verified successfully.
+Thus, the program to pop an element from the given stack using liked list is verified successfully.
+
+ 
+EXP NO:28 C PROGRAM TO DISPLAY QUEUE ELEMENTS USING LINKED LIST.
+
+Aim:
+To write a C program to display queue elements using linked list.
+Algorithm:
+1.	Check if Queue is Empty
+2.	Display Queue Elements
+3.	Print the data of the current node pointed to by front
+4.	Update front to point to the next node.
+5.	End the display function.
+ 
+Program:
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* front = NULL;
+struct Node* rear = NULL;
+
+void enqueue(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        printf("Memory allocation failed.\n");
+        return;
+    }
+    newNode->data = value;
+    newNode->next = NULL;
+    if (front == NULL && rear == NULL) {
+        front = rear = newNode;
+    } else {
+        rear->next = newNode;
+        rear = newNode;
+    }
+}
+
+void display() {
+    if (front == NULL) {
+        printf("Queue is empty.\n");
+    } else {
+        struct Node* temp = front;
+        printf("Queue elements are:\n");
+        while (temp != NULL) {
+            printf("%d ", temp->data);
+            temp = temp->next;
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int choice, value;
+
+    while (1) {
+        printf("\n1. Enqueue\n2. Display\n3. Exit\nEnter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to enqueue: ");
+                scanf("%d", &value);
+                enqueue(value);
+                break;
+            case 2:
+                display();
+                break;
+            case 3:
+                return 0;
+            default:
+                printf("Invalid choice. Try again.\n");
+        }
+    }
+}
+
+```
+Output:
+
+<img width="441" height="842" alt="image" src="https://github.com/user-attachments/assets/bbc36eca-8c59-4aab-9596-18c375d5edf6" />
+
+
+Result:
+
+Thus, the program to display queue elements using linked list is verified successfully.
 
 
  
-EXP NO 25: C PROGRAM TO COUNT THE NUMBER OF WORDS IN A      SENTENCE
+EXP NO:29 C PROGRAM TO INSERT ELEMENTS IN QUEUE USING LINKED LIST
 
+Aim:
+To write a C program to insert elements in queue using linked list
+
+Algorithm:
+1.	Allocate Memory for New Node
+2.	Set Data and Next Pointer
+3.	Check if Queue is Empty
+4.	Set both front and rear to point to the new node p.
+5.	Set the next pointer of the current rear to point to the new node p.
+6.	End of Enqueue Operation
+ 
+Program:
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* front = NULL;
+struct Node* rear = NULL;
+
+void enqueue(int value) {
+    struct Node* p = (struct Node*)malloc(sizeof(struct Node));
+    if (p == NULL) {
+        printf("Memory allocation failed.\n");
+        return;
+    }
+    p->data = value;
+    p->next = NULL;
+
+    if (front == NULL && rear == NULL) {
+        front = rear = p;
+    } else {
+        rear->next = p;
+        rear = p;
+    }
+}
+
+void display() {
+    if (front == NULL) {
+        printf("Queue is empty.\n");
+    } else {
+        struct Node* temp = front;
+        printf("Queue elements are:\n");
+        while (temp != NULL) {
+            printf("%d ", temp->data);
+            temp = temp->next;
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int choice, value;
+
+    while (1) {
+        printf("\n1. Enqueue\n2. Display\n3. Exit\nEnter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to enqueue: ");
+                scanf("%d", &value);
+                enqueue(value);
+                break;
+            case 2:
+                display();
+                break;
+            case 3:
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+}
+
+```
+
+Output:
+
+
+<img width="666" height="815" alt="image" src="https://github.com/user-attachments/assets/a3ef2bcf-6de9-4fbe-9950-496a7a6ce107" />
+
+
+Result:
+
+Thus, the program to insert elements in queue using linked list is verified successfully.
+
+
+
+EXP NO:30 C FUNCTION TO FIND THE PEEK OF QUEUE USING LINKED LIST.
 
 
 Aim:
 
-To write a C program that counts the number of words in a given sentence.
+The aim of this function is to retrieve the "peek" (the front element) of a queue implemented using a linked list
 
 Algorithm:
 
-1.	Input the sentence: Take a sentence from the user.
-2.	Initialize a counter variable: This will keep track of the number of words.
-3.	Process each character of the sentence:
-o	Iterate through the sentence, checking each character.
-o	If a character is not a space, it may belong to a word. If it's the first non-space character after a space or at the start, increment the word count.
-4.	Handle spaces and punctuation: Skip over spaces, punctuation marks, and consider each word as a sequence of characters separated by spaces.
-5.	Display the result: After processing the sentence, output the total word count.
-
-
+1.	Check if the queue is empty:
+o	If the queue is empty (i.e., the front pointer is NULL), return an error or a message indicating that the queue is empty.
+2.	Access the front element:
+o	If the queue is not empty, return the data stored in the front node of the linked list (i.e., the element at the head of the queue).
 
 Program:
+
 ```
 #include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* front = NULL;
+struct Node* rear = NULL;
+
+void enqueue(int value) {
+    struct Node* p = (struct Node*)malloc(sizeof(struct Node));
+    if (p == NULL) {
+        printf("Memory allocation failed.\n");
+        return;
+    }
+    p->data = value;
+    p->next = NULL;
+
+    if (front == NULL && rear == NULL) {
+        front = rear = p;
+    } else {
+        rear->next = p;
+        rear = p;
+    }
+}
+
+void display() {
+    if (front == NULL) {
+        printf("Queue is empty.\n");
+    } else {
+        struct Node* temp = front;
+        printf("Queue elements are:\n");
+        while (temp != NULL) {
+            printf("%d ", temp->data);
+            temp = temp->next;
+        }
+        printf("\n");
+    }
+}
+
+int peek() {
+    if (front == NULL) {
+        printf("Queue is empty.\n");
+        return -1;  // Return -1 to indicate an empty queue
+    } else {
+        return front->data;
+    }
+}
 
 int main() {
-    char sentence[100];
-    int i = 0, words = 0;
-    int inWord = 0;
+    int choice, value;
 
-    printf("Enter a sentence: ");
-    fgets(sentence, sizeof(sentence), stdin);
+    while (1) {
+        printf("\n1. Enqueue\n2. Display\n3. Peek\n4. Exit\nEnter your choice: ");
+        scanf("%d", &choice);
 
-    while (sentence[i] != '\0') {
-        if (sentence[i] != ' ' && sentence[i] != '\n') {
-            if (inWord == 0) {
-                words++;
-                inWord = 1;
-            }
-        } else {
-            inWord = 0;
+        switch (choice) {
+            case 1:
+                printf("Enter value to enqueue: ");
+                scanf("%d", &value);
+                enqueue(value);
+                break;
+            case 2:
+                display();
+                break;
+            case 3:
+                printf("Front element is: %d\n", peek());
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
         }
-        i++;
     }
-
-    printf("The number of words in the sentence is: %d\n", words);
-
-    return 0;
 }
 
 
@@ -285,10 +463,10 @@ int main() {
 
 Output:
 
-<img width="721" height="171" alt="image" src="https://github.com/user-attachments/assets/d6ad1a2b-d49b-46d1-b02b-de1201b2f513" />
 
+<img width="292" height="801" alt="image" src="https://github.com/user-attachments/assets/c34126c8-9abd-42e6-b1db-299e367133e0" />
 
 
 Result:
 
-Thus, the program that counts the number of words in a given sentence is verified successfully.
+Thus, the program to retrieve the "peek" (the front element) of a queue implemented using a linked list is verified successfully.
